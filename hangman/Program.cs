@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+// Hangman program for gussing a word
+// 2022-03-29 PriyankaJ
 namespace hangman
 {
     class Program
