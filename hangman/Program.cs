@@ -10,8 +10,7 @@ namespace hangman
     {
         static void Main(string[] args)
         {
-            try
-            {
+
                 // Declare variable
                 Random randGen = new Random();
                 bool isAlive = true;
@@ -34,11 +33,6 @@ namespace hangman
                     }
                 }
                 Console.WriteLine("Thanks for playing the game");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("{0} Exception caught.", e);
-            }
         }
 
         static void playgame(string randword)
@@ -49,17 +43,26 @@ namespace hangman
             int j = 1;
             char inputletter;
             int matched_count = 0;
-
-            // Create guess word
-            StringBuilder guessword = new StringBuilder(randword.Length);
-            
+            // To store incorrect word
+            StringBuilder incrtLetter = new StringBuilder();
+            // Character array to store the guess word. 
+            char[] correctguess = new char[randword.Length];
 
             // Create empty guess word so that user know how many char to guess
             for ( i = 0; i < randword.Length; i++)
-                guessword.Append('_');
-            Console.WriteLine(guessword); 
+            {
+                correctguess[i] = '_';
+            }
 
-            while(j < 11)
+            Console.WriteLine("Word to be guessed: \n");
+            foreach (char r in correctguess)
+            {
+                Console.Write("{0} ", r);
+            }
+
+            Console.WriteLine("\n");
+
+            while (j < 11)
             {
                 bool guessedcorrect = false;
                 bool guesscheck = false;
@@ -91,29 +94,41 @@ namespace hangman
                 {
                     if (randword[i] == inputletter)
                     {
-                        guessword[i] = inputletter;
+                        correctguess[i] = inputletter;
                         matched_count++;
                         guessedcorrect = true;
                     }
                 }
 
+                // Store incorrect word in the string builder.
+                if (!guessedcorrect)
+                    incrtLetter.Append(inputletter);
+
                 // If player guess right word 
                 if (randword.Length == matched_count)
                 {
-                    Console.WriteLine("******* Game won ******** \n Guessed word - {0}", guessword);
+                    Console.WriteLine("******* Game won ********");
+                    foreach (char r in correctguess)
+                    {
+                        Console.Write("{0}", r);
+                    }
+                    Console.WriteLine("\n");
                     break;
                 }
 
                 // Display each round Result 
                 if (guessedcorrect)
                 {
-                    Console.WriteLine("The guess was correct : {0}", guessword);
-                    
+                    Console.WriteLine("The guess was correct : ");
+                    foreach (char r in correctguess)
+                    {
+                        Console.Write("{0} ", r);
+                    }
+                    Console.WriteLine("\n");
                 }
                 else
                 {
-                    Console.WriteLine("The guess was incorrect : {0}", inputletter);
-                    
+                    Console.WriteLine("The guess was incorrect : {0}", incrtLetter.Remove(0, incrtLetter.Length - 1).ToString());
                 }
 
                 // Incerement chances    
