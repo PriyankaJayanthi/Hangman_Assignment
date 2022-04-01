@@ -92,7 +92,7 @@ namespace hangman
                 // If player guess right word 
                 if (randword.Length == matched_count)
                 {
-                    Console.WriteLine("******* Game won ********");
+                    Console.WriteLine("******* Game won ******** \n Guessed word - {0}", guessword);
                     break;
                 }
 
@@ -104,7 +104,7 @@ namespace hangman
                 }
                 else
                 {
-                    Console.WriteLine("The guess was incorrect : {0}", guessword);
+                    Console.WriteLine("The guess was incorrect : {0}", inputletter);
                     
                 }
 
