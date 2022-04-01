@@ -9,28 +9,35 @@ namespace hangman
     {
         static void Main(string[] args)
         {
-            // Declare variable
-            Random randGen = new Random();
-            bool isAlive = true; 
-            string[] wordslist = { "Orange", "John", "flower", "sweden", "butter", "book", "water", "pencile", "banana","apple" };  //Creating array with 10 different words to guess.
-            
-            Console.WriteLine("******** Welcom to Hungman game ********* ");
-            // To play or exit game
-            while (isAlive)
+            try
             {
-                Console.WriteLine("To play game press 1 or press 2 to exit");
-                int.TryParse(Console.ReadLine(), out int selection);
-                switch(selection)
+                // Declare variable
+                Random randGen = new Random();
+                bool isAlive = true;
+                string[] wordslist = { "Orange", "John", "flower", "sweden", "butter", "book", "water", "pencile", "banana", "apple" };  //Creating array with 10 different words to guess.
+
+                Console.WriteLine("******** Welcom to Hungman game ********* ");
+                // To play or exit game
+                while (isAlive)
                 {
-                    case 1:
-                        playgame(wordslist[randGen.Next(0, 9)].ToUpper()); 
-                        break;
-                    case 2:
-                        isAlive = false; 
-                        break;
+                    Console.WriteLine("To play game press 1 or press 2 to exit");
+                    int.TryParse(Console.ReadLine(), out int selection);
+                    switch (selection)
+                    {
+                        case 1:
+                            playgame(wordslist[randGen.Next(0, 9)].ToUpper());
+                            break;
+                        case 2:
+                            isAlive = false;
+                            break;
+                    }
                 }
+                Console.WriteLine("Thanks for playing the game");
             }
-            Console.WriteLine("Thanks for playing the game");
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+            }
         }
 
         static void playgame(string randword)
@@ -114,7 +121,7 @@ namespace hangman
             }
               if (randword.Length != matched_count)
             {
-                Console.WriteLine("Lost the game");
+                Console.WriteLine("************ Lost the game **************");
                 
             }
         }
