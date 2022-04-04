@@ -20,14 +20,14 @@ namespace hangman
                 // To play or exit game
                 while (isAlive)
                 {
-                    Console.WriteLine("To play game press 1 or press 2 to exit");
+                    Console.WriteLine("To play game press 1 or press any key to exit");
                     int.TryParse(Console.ReadLine(), out int selection);
                     switch (selection)
                     {
                         case 1:
                             playgame(wordslist[randGen.Next(0, 9)].ToUpper());
                             break;
-                        case 2:
+                    default:
                             isAlive = false;
                             break;
                     }
@@ -40,9 +40,10 @@ namespace hangman
             // Declare variables
             List<char> guessletter = new List<char>();
             int i;
-            int j = 1;
+            int j = 10;
             char inputletter;
             int matched_count = 0;
+            //int num_0f_chances = 11;
             // To store incorrect word
             StringBuilder incrtLetter = new StringBuilder();
             // Character array to store the guess word. 
@@ -62,19 +63,19 @@ namespace hangman
 
             Console.WriteLine("\n");
 
-            while (j < 11)
+            while (j >= 1)
             {
                 bool guessedcorrect = false;
                 bool guesscheck = false;
 
                 //Taking input from the user
-                Console.WriteLine("Try {0} : Enter the guess letter", j);
-
+                
                 //Request user to input Character 
+                Console.WriteLine("Number of chanses left {0} : Enter the guess letter", j);
                 inputletter = char.ToUpper(Console.ReadLine()[0]);
-           
-                //if user has already choosed the input character
-                for (i = 0; i < guessletter.Count; i++)
+  
+                    //if user has already choosed the input character
+                    for (i = 0; i < guessletter.Count; i++)
                 {
                     if (guessletter[i] == inputletter)
                     {
@@ -128,11 +129,11 @@ namespace hangman
                 }
                 else
                 {
-                    Console.WriteLine("The guess was incorrect : {0}", incrtLetter.Remove(0, incrtLetter.Length - 1).ToString());
+                    Console.WriteLine("The guess was incorrect : {0}", incrtLetter);
                 }
 
                 // Incerement chances    
-                j++;
+                j--;
                 
             }
               if (randword.Length != matched_count)
